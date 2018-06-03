@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
 
-    <classPathEntry location="/Users/bjhl/.m2/repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar"/>
+    <!--<classPathEntry location="/Users/bjhl/.m2/repository/mysql/mysql-connector-java/5.1.21/mysql-connector-java-5.1.21.jar"/>-->
 
     <context id="context" targetRuntime="MyBatis3">
 
@@ -21,10 +21,15 @@
         <!-- 增加爱Models Serializable实现 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 
-        <!--<commentGenerator>-->
-            <!--<property name="suppressAllComments" value="true"/>-->
-            <!--<property name="suppressDate" value="false"/>-->
-        <!--</commentGenerator>-->
+        <!-- 分页插件 -->
+        <!-- 在example类中增 page 属性，并在mapper.xml的查询中加入page !=null 时的查询 -->
+        <!--<plugin type="org.mybatis.generator.plugins.MySQLLimitPlugin" />-->
+        <plugin type="org.mybatis.generator.plugins.MySQLPagerPlugin" />
+        <!--<plugin type="org.mybatis.generator.plugins.MySQLPaginationPlugin" />-->
+
+        <!--<plugin type="com.xxg.mybatis.plugins.MySQLLimitPlugin" />-->
+        <!--<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />-->
+
 
         <commentGenerator type="org.mybatis.generator.internal.VoofchatCommentGenerator">
             <property name="javaFileEncoding" value="UTF-8"/>
@@ -42,7 +47,7 @@
 
         <!-- 生成bean和example对象 -->
         <javaModelGenerator targetPackage="com.voofchat.generator.po" targetProject="src/main/java">
-            <property name="constructorBased" value="true"/>
+            <property name="constructorBased" value="false"/>
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -56,10 +61,17 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <table tableName="seckill" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false" >
-            <generatedKey column="seckill_id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <table tableName="seckill"/>
+        <table tableName="success_killed"/>
+        <!--<table tableName="seckill" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false" >-->
+            <!--<generatedKey column="seckill_id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="success_killed" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false" >-->
+            <!--<generatedKey column="seckill_id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
     </context>
 </generatorConfiguration>

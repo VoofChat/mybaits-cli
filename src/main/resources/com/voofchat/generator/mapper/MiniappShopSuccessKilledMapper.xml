@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.voofchat.generator.dao.MiniappShopSeckillDao">
+<mapper namespace="com.voofchat.generator.dao.MiniappShopSuccessKilledDao">
 
-    <resultMap id="BaseResultMap" type="com.voofchat.generator.po.MiniappShopSeckillPo">
+    <resultMap id="BaseResultMap" type="com.voofchat.generator.po.MiniappShopSuccessKilledPo">
         <id column="seckill_id" jdbcType="BIGINT" property="seckillId" />
-        <result column="name" jdbcType="VARCHAR" property="name" />
-        <result column="number" jdbcType="INTEGER" property="number" />
-        <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
-        <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+        <id column="user_phone" jdbcType="BIGINT" property="userPhone" />
+        <result column="state" jdbcType="TINYINT" property="state" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     </resultMap>
 
@@ -72,16 +70,16 @@
     </sql>
 
     <sql id="Base_Column_List">
-        seckill_id, name, number, start_time, end_time, create_time
+        seckill_id, user_phone, state, create_time
     </sql>
 
-    <select id="selectByExample" parameterType="com.voofchat.generator.po.MiniappShopSeckillExamplePo" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.voofchat.generator.po.MiniappShopSuccessKilledExamplePo" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List" />
-        from um.`seckill`
+        from um.`success_killed`
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
@@ -93,51 +91,45 @@
         </if>
     </select>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="com.voofchat.generator.po.MiniappShopSuccessKilledKeyPo" resultMap="BaseResultMap">
         select 
         <include refid="Base_Column_List" />
-        from um.`seckill`
+        from um.`success_killed`
         where seckill_id = #{seckillId,jdbcType=BIGINT}
+          and user_phone = #{userPhone,jdbcType=BIGINT}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from um.`seckill`
+    <delete id="deleteByPrimaryKey" parameterType="com.voofchat.generator.po.MiniappShopSuccessKilledKeyPo">
+        delete from um.`success_killed`
         where seckill_id = #{seckillId,jdbcType=BIGINT}
+          and user_phone = #{userPhone,jdbcType=BIGINT}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.voofchat.generator.po.MiniappShopSeckillExamplePo">
-        delete from um.`seckill`
+    <delete id="deleteByExample" parameterType="com.voofchat.generator.po.MiniappShopSuccessKilledExamplePo">
+        delete from um.`success_killed`
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.voofchat.generator.po.MiniappShopSeckillPo">
-        insert into um.`seckill` (seckill_id, name, number, 
-            start_time, end_time, create_time
-            )
-        values (#{seckillId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-            #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
-            )
+    <insert id="insert" parameterType="com.voofchat.generator.po.MiniappShopSuccessKilledPo">
+        insert into um.`success_killed` (seckill_id, user_phone, state, 
+            create_time)
+        values (#{seckillId,jdbcType=BIGINT}, #{userPhone,jdbcType=BIGINT}, #{state,jdbcType=TINYINT}, 
+            #{createTime,jdbcType=TIMESTAMP})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.voofchat.generator.po.MiniappShopSeckillPo">
-        insert into um.`seckill`
+    <insert id="insertSelective" parameterType="com.voofchat.generator.po.MiniappShopSuccessKilledPo">
+        insert into um.`success_killed`
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="seckillId != null">
                 seckill_id,
             </if>
-            <if test="name != null">
-                name,
+            <if test="userPhone != null">
+                user_phone,
             </if>
-            <if test="number != null">
-                number,
-            </if>
-            <if test="startTime != null">
-                start_time,
-            </if>
-            <if test="endTime != null">
-                end_time,
+            <if test="state != null">
+                state,
             </if>
             <if test="createTime != null">
                 create_time,
@@ -147,17 +139,11 @@
             <if test="seckillId != null">
                 #{seckillId,jdbcType=BIGINT},
             </if>
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=BIGINT},
             </if>
-            <if test="number != null">
-                #{number,jdbcType=INTEGER},
-            </if>
-            <if test="startTime != null">
-                #{startTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="endTime != null">
-                #{endTime,jdbcType=TIMESTAMP},
+            <if test="state != null">
+                #{state,jdbcType=TINYINT},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -165,30 +151,24 @@
         </trim>
     </insert>
 
-    <select id="countByExample" parameterType="com.voofchat.generator.po.MiniappShopSeckillExamplePo" resultType="java.lang.Integer">
-        select count(*) from um.`seckill`
+    <select id="countByExample" parameterType="com.voofchat.generator.po.MiniappShopSuccessKilledExamplePo" resultType="java.lang.Integer">
+        select count(*) from um.`success_killed`
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
     </select>
 
     <update id="updateByExampleSelective" parameterType="map">
-        update um.`seckill`
+        update um.`success_killed`
         <set>
             <if test="record.seckillId != null">
                 seckill_id = #{record.seckillId,jdbcType=BIGINT},
             </if>
-            <if test="record.name != null">
-                name = #{record.name,jdbcType=VARCHAR},
+            <if test="record.userPhone != null">
+                user_phone = #{record.userPhone,jdbcType=BIGINT},
             </if>
-            <if test="record.number != null">
-                number = #{record.number,jdbcType=INTEGER},
-            </if>
-            <if test="record.startTime != null">
-                start_time = #{record.startTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="record.endTime != null">
-                end_time = #{record.endTime,jdbcType=TIMESTAMP},
+            <if test="record.state != null">
+                state = #{record.state,jdbcType=TINYINT},
             </if>
             <if test="record.createTime != null">
                 create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -200,47 +180,35 @@
     </update>
 
     <update id="updateByExample" parameterType="map">
-        update um.`seckill`
+        update um.`success_killed`
         set seckill_id = #{record.seckillId,jdbcType=BIGINT},
-            name = #{record.name,jdbcType=VARCHAR},
-            number = #{record.number,jdbcType=INTEGER},
-            start_time = #{record.startTime,jdbcType=TIMESTAMP},
-            end_time = #{record.endTime,jdbcType=TIMESTAMP},
+            user_phone = #{record.userPhone,jdbcType=BIGINT},
+            state = #{record.state,jdbcType=TINYINT},
             create_time = #{record.createTime,jdbcType=TIMESTAMP}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.voofchat.generator.po.MiniappShopSeckillPo">
-        update um.`seckill`
+    <update id="updateByPrimaryKeySelective" parameterType="com.voofchat.generator.po.MiniappShopSuccessKilledPo">
+        update um.`success_killed`
         <set>
-            <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="number != null">
-                number = #{number,jdbcType=INTEGER},
-            </if>
-            <if test="startTime != null">
-                start_time = #{startTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="endTime != null">
-                end_time = #{endTime,jdbcType=TIMESTAMP},
+            <if test="state != null">
+                state = #{state,jdbcType=TINYINT},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
         </set>
         where seckill_id = #{seckillId,jdbcType=BIGINT}
+          and user_phone = #{userPhone,jdbcType=BIGINT}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.voofchat.generator.po.MiniappShopSeckillPo">
-        update um.`seckill`
-        set name = #{name,jdbcType=VARCHAR},
-            number = #{number,jdbcType=INTEGER},
-            start_time = #{startTime,jdbcType=TIMESTAMP},
-            end_time = #{endTime,jdbcType=TIMESTAMP},
+    <update id="updateByPrimaryKey" parameterType="com.voofchat.generator.po.MiniappShopSuccessKilledPo">
+        update um.`success_killed`
+        set state = #{state,jdbcType=TINYINT},
             create_time = #{createTime,jdbcType=TIMESTAMP}
         where seckill_id = #{seckillId,jdbcType=BIGINT}
+          and user_phone = #{userPhone,jdbcType=BIGINT}
     </update>
 </mapper>
