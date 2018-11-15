@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baijia.mobileapp.dal.contenthouse.dao.ContenthouseAuthorityDao">
+
+    <resultMap id="BaseResultMap" type="com.baijia.mobileapp.dal.contenthouse.po.ContenthouseAuthorityPo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="app_id" jdbcType="VARCHAR" property="appId" />
+        <result column="open_id" jdbcType="VARCHAR" property="openId" />
+        <result column="union_id" jdbcType="VARCHAR" property="unionId" />
+        <result column="gsx_app_id" jdbcType="VARCHAR" property="gsxAppId" />
+        <result column="gsx_open_id" jdbcType="VARCHAR" property="gsxOpenId" />
+        <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+        <result column="content_id" jdbcType="INTEGER" property="contentId" />
+        <result column="column_id" jdbcType="INTEGER" property="columnId" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, app_id, open_id, union_id, gsx_app_id, gsx_open_id, order_sn, content_id, column_id, 
+        status, create_time, update_time
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from um.`rp_contenthouse_authority`
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from um.`rp_contenthouse_authority`
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.baijia.mobileapp.dal.contenthouse.po.ContenthouseAuthorityPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`rp_contenthouse_authority` (app_id, open_id, union_id, 
+            gsx_app_id, gsx_open_id, order_sn, 
+            content_id, column_id, status, 
+            create_time, update_time)
+        values (#{appId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
+            #{gsxAppId,jdbcType=VARCHAR}, #{gsxOpenId,jdbcType=VARCHAR}, #{orderSn,jdbcType=VARCHAR}, 
+            #{contentId,jdbcType=INTEGER}, #{columnId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.baijia.mobileapp.dal.contenthouse.po.ContenthouseAuthorityPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`rp_contenthouse_authority`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="unionId != null">
+                union_id,
+            </if>
+            <if test="gsxAppId != null">
+                gsx_app_id,
+            </if>
+            <if test="gsxOpenId != null">
+                gsx_open_id,
+            </if>
+            <if test="orderSn != null">
+                order_sn,
+            </if>
+            <if test="contentId != null">
+                content_id,
+            </if>
+            <if test="columnId != null">
+                column_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="unionId != null">
+                #{unionId,jdbcType=VARCHAR},
+            </if>
+            <if test="gsxAppId != null">
+                #{gsxAppId,jdbcType=VARCHAR},
+            </if>
+            <if test="gsxOpenId != null">
+                #{gsxOpenId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderSn != null">
+                #{orderSn,jdbcType=VARCHAR},
+            </if>
+            <if test="contentId != null">
+                #{contentId,jdbcType=INTEGER},
+            </if>
+            <if test="columnId != null">
+                #{columnId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.baijia.mobileapp.dal.contenthouse.po.ContenthouseAuthorityPo">
+        update um.`rp_contenthouse_authority`
+        <set>
+            <if test="appId != null">
+                app_id = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="unionId != null">
+                union_id = #{unionId,jdbcType=VARCHAR},
+            </if>
+            <if test="gsxAppId != null">
+                gsx_app_id = #{gsxAppId,jdbcType=VARCHAR},
+            </if>
+            <if test="gsxOpenId != null">
+                gsx_open_id = #{gsxOpenId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderSn != null">
+                order_sn = #{orderSn,jdbcType=VARCHAR},
+            </if>
+            <if test="contentId != null">
+                content_id = #{contentId,jdbcType=INTEGER},
+            </if>
+            <if test="columnId != null">
+                column_id = #{columnId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.baijia.mobileapp.dal.contenthouse.po.ContenthouseAuthorityPo">
+        update um.`rp_contenthouse_authority`
+        set app_id = #{appId,jdbcType=VARCHAR},
+            open_id = #{openId,jdbcType=VARCHAR},
+            union_id = #{unionId,jdbcType=VARCHAR},
+            gsx_app_id = #{gsxAppId,jdbcType=VARCHAR},
+            gsx_open_id = #{gsxOpenId,jdbcType=VARCHAR},
+            order_sn = #{orderSn,jdbcType=VARCHAR},
+            content_id = #{contentId,jdbcType=INTEGER},
+            column_id = #{columnId,jdbcType=INTEGER},
+            status = #{status,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

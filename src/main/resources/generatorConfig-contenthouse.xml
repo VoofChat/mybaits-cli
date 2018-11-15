@@ -49,32 +49,48 @@
         </javaTypeResolver>
 
         <!-- 生成bean和example对象 -->
-        <javaModelGenerator targetPackage="com.mobileapp.fenxiao.po" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.baijia.growthbase.dal.contenthouse.po" targetProject="src/main/java">
             <property name="constructorBased" value="false"/>
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- 生成mapper.xml类 -->
-        <sqlMapGenerator targetPackage="com.mobileapp.fenxiao.mapper" targetProject="src/main/resources/mapper">
+        <sqlMapGenerator targetPackage="contenthouse" targetProject="src/main/resources/mapper">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.mobileapp.fenxiao.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.baijia.growthbase.dal.contenthouse.dao" targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
 
-        <!--<table tableName="rp_mobileapp_fenxiao_commission_record" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+
+        <!--<table tableName="rp_contenthouse_authority" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--enableUpdateByExample="false">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
 
-        <table tableName="rp_coursesystem_common_gzh_template_preview" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        <!--<table tableName="rp_contenthouse_column" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="rp_contenthouse_content_column_relationship" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="rp_contenthouse_content" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+
+        <table tableName="rp_course_live_data" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-
 
 
     </context>

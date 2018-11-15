@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baijia.mobileapp.dal.assist.dao.CoursesystemAssistProductDao">
+
+    <resultMap id="BaseResultMap" type="com.baijia.mobileapp.dal.assist.po.CoursesystemAssistProductPo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="account_id" jdbcType="INTEGER" property="accountId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="app_id" jdbcType="VARCHAR" property="appId" />
+        <result column="qrcode" jdbcType="VARCHAR" property="qrcode" />
+        <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+        <result column="base_product_id" jdbcType="INTEGER" property="baseProductId" />
+        <result column="stock" jdbcType="INTEGER" property="stock" />
+        <result column="sale_count" jdbcType="INTEGER" property="saleCount" />
+        <result column="activity_count" jdbcType="INTEGER" property="activityCount" />
+        <result column="assist_count" jdbcType="INTEGER" property="assistCount" />
+        <result column="activity_price_min" jdbcType="DECIMAL" property="activityPriceMin" />
+        <result column="activity_price_max" jdbcType="DECIMAL" property="activityPriceMax" />
+        <result column="forward_card" jdbcType="VARCHAR" property="forwardCard" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baijia.mobileapp.dal.assist.po.CoursesystemAssistProductWithBLOBsPo">
+        <result column="thumbnail" jdbcType="LONGVARCHAR" property="thumbnail" />
+        <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, account_id, name, app_id, qrcode, shop_id, base_product_id, stock, sale_count, 
+        activity_count, assist_count, activity_price_min, activity_price_max, forward_card, 
+        status, start_time, end_time, create_time, update_time
+    </sql>
+
+    <sql id="Blob_Column_List">
+        thumbnail, content
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select 
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from um.`rp_coursesystem_assist_product`
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from um.`rp_coursesystem_assist_product`
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.baijia.mobileapp.dal.assist.po.CoursesystemAssistProductWithBLOBsPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`rp_coursesystem_assist_product` (account_id, name, app_id, 
+            qrcode, shop_id, base_product_id, 
+            stock, sale_count, activity_count, 
+            assist_count, activity_price_min, activity_price_max, 
+            forward_card, status, start_time, 
+            end_time, create_time, update_time, 
+            thumbnail, content)
+        values (#{accountId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, 
+            #{qrcode,jdbcType=VARCHAR}, #{shopId,jdbcType=INTEGER}, #{baseProductId,jdbcType=INTEGER}, 
+            #{stock,jdbcType=INTEGER}, #{saleCount,jdbcType=INTEGER}, #{activityCount,jdbcType=INTEGER}, 
+            #{assistCount,jdbcType=INTEGER}, #{activityPriceMin,jdbcType=DECIMAL}, #{activityPriceMax,jdbcType=DECIMAL}, 
+            #{forwardCard,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
+            #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+            #{thumbnail,jdbcType=LONGVARCHAR}, #{content,jdbcType=LONGVARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.baijia.mobileapp.dal.assist.po.CoursesystemAssistProductWithBLOBsPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`rp_coursesystem_assist_product`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="accountId != null">
+                account_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="qrcode != null">
+                qrcode,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="baseProductId != null">
+                base_product_id,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+            <if test="saleCount != null">
+                sale_count,
+            </if>
+            <if test="activityCount != null">
+                activity_count,
+            </if>
+            <if test="assistCount != null">
+                assist_count,
+            </if>
+            <if test="activityPriceMin != null">
+                activity_price_min,
+            </if>
+            <if test="activityPriceMax != null">
+                activity_price_max,
+            </if>
+            <if test="forwardCard != null">
+                forward_card,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="thumbnail != null">
+                thumbnail,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="accountId != null">
+                #{accountId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcode != null">
+                #{qrcode,jdbcType=VARCHAR},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="baseProductId != null">
+                #{baseProductId,jdbcType=INTEGER},
+            </if>
+            <if test="stock != null">
+                #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="saleCount != null">
+                #{saleCount,jdbcType=INTEGER},
+            </if>
+            <if test="activityCount != null">
+                #{activityCount,jdbcType=INTEGER},
+            </if>
+            <if test="assistCount != null">
+                #{assistCount,jdbcType=INTEGER},
+            </if>
+            <if test="activityPriceMin != null">
+                #{activityPriceMin,jdbcType=DECIMAL},
+            </if>
+            <if test="activityPriceMax != null">
+                #{activityPriceMax,jdbcType=DECIMAL},
+            </if>
+            <if test="forwardCard != null">
+                #{forwardCard,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="thumbnail != null">
+                #{thumbnail,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.baijia.mobileapp.dal.assist.po.CoursesystemAssistProductWithBLOBsPo">
+        update um.`rp_coursesystem_assist_product`
+        <set>
+            <if test="accountId != null">
+                account_id = #{accountId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null">
+                app_id = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcode != null">
+                qrcode = #{qrcode,jdbcType=VARCHAR},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="baseProductId != null">
+                base_product_id = #{baseProductId,jdbcType=INTEGER},
+            </if>
+            <if test="stock != null">
+                stock = #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="saleCount != null">
+                sale_count = #{saleCount,jdbcType=INTEGER},
+            </if>
+            <if test="activityCount != null">
+                activity_count = #{activityCount,jdbcType=INTEGER},
+            </if>
+            <if test="assistCount != null">
+                assist_count = #{assistCount,jdbcType=INTEGER},
+            </if>
+            <if test="activityPriceMin != null">
+                activity_price_min = #{activityPriceMin,jdbcType=DECIMAL},
+            </if>
+            <if test="activityPriceMax != null">
+                activity_price_max = #{activityPriceMax,jdbcType=DECIMAL},
+            </if>
+            <if test="forwardCard != null">
+                forward_card = #{forwardCard,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="thumbnail != null">
+                thumbnail = #{thumbnail,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baijia.mobileapp.dal.assist.po.CoursesystemAssistProductWithBLOBsPo">
+        update um.`rp_coursesystem_assist_product`
+        set account_id = #{accountId,jdbcType=INTEGER},
+            name = #{name,jdbcType=VARCHAR},
+            app_id = #{appId,jdbcType=VARCHAR},
+            qrcode = #{qrcode,jdbcType=VARCHAR},
+            shop_id = #{shopId,jdbcType=INTEGER},
+            base_product_id = #{baseProductId,jdbcType=INTEGER},
+            stock = #{stock,jdbcType=INTEGER},
+            sale_count = #{saleCount,jdbcType=INTEGER},
+            activity_count = #{activityCount,jdbcType=INTEGER},
+            assist_count = #{assistCount,jdbcType=INTEGER},
+            activity_price_min = #{activityPriceMin,jdbcType=DECIMAL},
+            activity_price_max = #{activityPriceMax,jdbcType=DECIMAL},
+            forward_card = #{forwardCard,jdbcType=VARCHAR},
+            status = #{status,jdbcType=INTEGER},
+            start_time = #{startTime,jdbcType=TIMESTAMP},
+            end_time = #{endTime,jdbcType=TIMESTAMP},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            thumbnail = #{thumbnail,jdbcType=LONGVARCHAR},
+            content = #{content,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.baijia.mobileapp.dal.assist.po.CoursesystemAssistProductPo">
+        update um.`rp_coursesystem_assist_product`
+        set account_id = #{accountId,jdbcType=INTEGER},
+            name = #{name,jdbcType=VARCHAR},
+            app_id = #{appId,jdbcType=VARCHAR},
+            qrcode = #{qrcode,jdbcType=VARCHAR},
+            shop_id = #{shopId,jdbcType=INTEGER},
+            base_product_id = #{baseProductId,jdbcType=INTEGER},
+            stock = #{stock,jdbcType=INTEGER},
+            sale_count = #{saleCount,jdbcType=INTEGER},
+            activity_count = #{activityCount,jdbcType=INTEGER},
+            assist_count = #{assistCount,jdbcType=INTEGER},
+            activity_price_min = #{activityPriceMin,jdbcType=DECIMAL},
+            activity_price_max = #{activityPriceMax,jdbcType=DECIMAL},
+            forward_card = #{forwardCard,jdbcType=VARCHAR},
+            status = #{status,jdbcType=INTEGER},
+            start_time = #{startTime,jdbcType=TIMESTAMP},
+            end_time = #{endTime,jdbcType=TIMESTAMP},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

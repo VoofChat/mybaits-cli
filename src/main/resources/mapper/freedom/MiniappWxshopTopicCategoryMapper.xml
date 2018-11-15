@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.voofchat.freedom.biz.shop.dao.MiniappWxshopTopicCategoryDao">
+
+    <resultMap id="BaseResultMap" type="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopTopicCategoryPo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="img" jdbcType="VARCHAR" property="img" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, title, img
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from um.`miniapp_wxshop_topic_category`
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from um.`miniapp_wxshop_topic_category`
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopTopicCategoryPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`miniapp_wxshop_topic_category` (title, img)
+        values (#{title,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopTopicCategoryPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`miniapp_wxshop_topic_category`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">
+                title,
+            </if>
+            <if test="img != null">
+                img,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopTopicCategoryPo">
+        update um.`miniapp_wxshop_topic_category`
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopTopicCategoryPo">
+        update um.`miniapp_wxshop_topic_category`
+        set title = #{title,jdbcType=VARCHAR},
+            img = #{img,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

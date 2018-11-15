@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.voofchat.freedom.biz.shop.dao.MiniappWxshopProductSpecificationRelationshipDao">
+
+    <resultMap id="BaseResultMap" type="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductSpecificationRelationshipPo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="product_id" jdbcType="INTEGER" property="productId" />
+        <result column="first_specification_id" jdbcType="INTEGER" property="firstSpecificationId" />
+        <result column="second_specification_id" jdbcType="INTEGER" property="secondSpecificationId" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, product_id, first_specification_id, second_specification_id
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from um.`miniapp_wxshop_product_specification_relationship`
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from um.`miniapp_wxshop_product_specification_relationship`
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductSpecificationRelationshipPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`miniapp_wxshop_product_specification_relationship` (product_id, first_specification_id, 
+            second_specification_id)
+        values (#{productId,jdbcType=INTEGER}, #{firstSpecificationId,jdbcType=INTEGER}, 
+            #{secondSpecificationId,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductSpecificationRelationshipPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`miniapp_wxshop_product_specification_relationship`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="firstSpecificationId != null">
+                first_specification_id,
+            </if>
+            <if test="secondSpecificationId != null">
+                second_specification_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="firstSpecificationId != null">
+                #{firstSpecificationId,jdbcType=INTEGER},
+            </if>
+            <if test="secondSpecificationId != null">
+                #{secondSpecificationId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductSpecificationRelationshipPo">
+        update um.`miniapp_wxshop_product_specification_relationship`
+        <set>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="firstSpecificationId != null">
+                first_specification_id = #{firstSpecificationId,jdbcType=INTEGER},
+            </if>
+            <if test="secondSpecificationId != null">
+                second_specification_id = #{secondSpecificationId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductSpecificationRelationshipPo">
+        update um.`miniapp_wxshop_product_specification_relationship`
+        set product_id = #{productId,jdbcType=INTEGER},
+            first_specification_id = #{firstSpecificationId,jdbcType=INTEGER},
+            second_specification_id = #{secondSpecificationId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

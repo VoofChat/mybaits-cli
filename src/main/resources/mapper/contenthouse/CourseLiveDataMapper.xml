@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baijia.growthbase.dal.contenthouse.dao.CourseLiveDataDao">
+
+    <resultMap id="BaseResultMap" type="com.baijia.growthbase.dal.contenthouse.po.CourseLiveDataPo">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="source" jdbcType="INTEGER" property="source" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="head_img_url" jdbcType="VARCHAR" property="headImgUrl" />
+        <result column="wechat_id" jdbcType="VARCHAR" property="wechatId" />
+        <result column="union_id" jdbcType="VARCHAR" property="unionId" />
+        <result column="data_type" jdbcType="INTEGER" property="dataType" />
+        <result column="live_room_num" jdbcType="BIGINT" property="liveRoomNum" />
+        <result column="amr_file_flag" jdbcType="INTEGER" property="amrFileFlag" />
+        <result column="mp3_file_flag" jdbcType="INTEGER" property="mp3FileFlag" />
+        <result column="type" jdbcType="INTEGER" property="type" />
+        <result column="info_type" jdbcType="INTEGER" property="infoType" />
+        <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+        <result column="identity" jdbcType="INTEGER" property="identity" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="open_id" jdbcType="VARCHAR" property="openId" />
+        <result column="app_id" jdbcType="VARCHAR" property="appId" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baijia.growthbase.dal.contenthouse.po.CourseLiveDataWithBLOBsPo">
+        <result column="content" jdbcType="LONGVARCHAR" property="content" />
+        <result column="info" jdbcType="LONGVARCHAR" property="info" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, source, user_name, head_img_url, wechat_id, union_id, data_type, live_room_num, 
+        amr_file_flag, mp3_file_flag, type, info_type, like_count, identity, create_time, 
+        update_time, open_id, app_id, status
+    </sql>
+
+    <sql id="Blob_Column_List">
+        content, info
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select 
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from um.`rp_course_live_data`
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from um.`rp_course_live_data`
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.baijia.growthbase.dal.contenthouse.po.CourseLiveDataWithBLOBsPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`rp_course_live_data` (source, user_name, head_img_url, 
+            wechat_id, union_id, data_type, 
+            live_room_num, amr_file_flag, mp3_file_flag, 
+            type, info_type, like_count, 
+            identity, create_time, update_time, 
+            open_id, app_id, status, 
+            content, info)
+        values (#{source,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{headImgUrl,jdbcType=VARCHAR}, 
+            #{wechatId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, #{dataType,jdbcType=INTEGER}, 
+            #{liveRoomNum,jdbcType=BIGINT}, #{amrFileFlag,jdbcType=INTEGER}, #{mp3FileFlag,jdbcType=INTEGER}, 
+            #{type,jdbcType=INTEGER}, #{infoType,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER}, 
+            #{identity,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+            #{openId,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+            #{content,jdbcType=LONGVARCHAR}, #{info,jdbcType=LONGVARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.baijia.growthbase.dal.contenthouse.po.CourseLiveDataWithBLOBsPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`rp_course_live_data`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="source != null">
+                source,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="headImgUrl != null">
+                head_img_url,
+            </if>
+            <if test="wechatId != null">
+                wechat_id,
+            </if>
+            <if test="unionId != null">
+                union_id,
+            </if>
+            <if test="dataType != null">
+                data_type,
+            </if>
+            <if test="liveRoomNum != null">
+                live_room_num,
+            </if>
+            <if test="amrFileFlag != null">
+                amr_file_flag,
+            </if>
+            <if test="mp3FileFlag != null">
+                mp3_file_flag,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="infoType != null">
+                info_type,
+            </if>
+            <if test="likeCount != null">
+                like_count,
+            </if>
+            <if test="identity != null">
+                identity,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="info != null">
+                info,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="source != null">
+                #{source,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="headImgUrl != null">
+                #{headImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatId != null">
+                #{wechatId,jdbcType=VARCHAR},
+            </if>
+            <if test="unionId != null">
+                #{unionId,jdbcType=VARCHAR},
+            </if>
+            <if test="dataType != null">
+                #{dataType,jdbcType=INTEGER},
+            </if>
+            <if test="liveRoomNum != null">
+                #{liveRoomNum,jdbcType=BIGINT},
+            </if>
+            <if test="amrFileFlag != null">
+                #{amrFileFlag,jdbcType=INTEGER},
+            </if>
+            <if test="mp3FileFlag != null">
+                #{mp3FileFlag,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="infoType != null">
+                #{infoType,jdbcType=INTEGER},
+            </if>
+            <if test="likeCount != null">
+                #{likeCount,jdbcType=INTEGER},
+            </if>
+            <if test="identity != null">
+                #{identity,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="info != null">
+                #{info,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.baijia.growthbase.dal.contenthouse.po.CourseLiveDataWithBLOBsPo">
+        update um.`rp_course_live_data`
+        <set>
+            <if test="source != null">
+                source = #{source,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="headImgUrl != null">
+                head_img_url = #{headImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatId != null">
+                wechat_id = #{wechatId,jdbcType=VARCHAR},
+            </if>
+            <if test="unionId != null">
+                union_id = #{unionId,jdbcType=VARCHAR},
+            </if>
+            <if test="dataType != null">
+                data_type = #{dataType,jdbcType=INTEGER},
+            </if>
+            <if test="liveRoomNum != null">
+                live_room_num = #{liveRoomNum,jdbcType=BIGINT},
+            </if>
+            <if test="amrFileFlag != null">
+                amr_file_flag = #{amrFileFlag,jdbcType=INTEGER},
+            </if>
+            <if test="mp3FileFlag != null">
+                mp3_file_flag = #{mp3FileFlag,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="infoType != null">
+                info_type = #{infoType,jdbcType=INTEGER},
+            </if>
+            <if test="likeCount != null">
+                like_count = #{likeCount,jdbcType=INTEGER},
+            </if>
+            <if test="identity != null">
+                identity = #{identity,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="openId != null">
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null">
+                app_id = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="info != null">
+                info = #{info,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baijia.growthbase.dal.contenthouse.po.CourseLiveDataWithBLOBsPo">
+        update um.`rp_course_live_data`
+        set source = #{source,jdbcType=INTEGER},
+            user_name = #{userName,jdbcType=VARCHAR},
+            head_img_url = #{headImgUrl,jdbcType=VARCHAR},
+            wechat_id = #{wechatId,jdbcType=VARCHAR},
+            union_id = #{unionId,jdbcType=VARCHAR},
+            data_type = #{dataType,jdbcType=INTEGER},
+            live_room_num = #{liveRoomNum,jdbcType=BIGINT},
+            amr_file_flag = #{amrFileFlag,jdbcType=INTEGER},
+            mp3_file_flag = #{mp3FileFlag,jdbcType=INTEGER},
+            type = #{type,jdbcType=INTEGER},
+            info_type = #{infoType,jdbcType=INTEGER},
+            like_count = #{likeCount,jdbcType=INTEGER},
+            identity = #{identity,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            open_id = #{openId,jdbcType=VARCHAR},
+            app_id = #{appId,jdbcType=VARCHAR},
+            status = #{status,jdbcType=INTEGER},
+            content = #{content,jdbcType=LONGVARCHAR},
+            info = #{info,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.baijia.growthbase.dal.contenthouse.po.CourseLiveDataPo">
+        update um.`rp_course_live_data`
+        set source = #{source,jdbcType=INTEGER},
+            user_name = #{userName,jdbcType=VARCHAR},
+            head_img_url = #{headImgUrl,jdbcType=VARCHAR},
+            wechat_id = #{wechatId,jdbcType=VARCHAR},
+            union_id = #{unionId,jdbcType=VARCHAR},
+            data_type = #{dataType,jdbcType=INTEGER},
+            live_room_num = #{liveRoomNum,jdbcType=BIGINT},
+            amr_file_flag = #{amrFileFlag,jdbcType=INTEGER},
+            mp3_file_flag = #{mp3FileFlag,jdbcType=INTEGER},
+            type = #{type,jdbcType=INTEGER},
+            info_type = #{infoType,jdbcType=INTEGER},
+            like_count = #{likeCount,jdbcType=INTEGER},
+            identity = #{identity,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            open_id = #{openId,jdbcType=VARCHAR},
+            app_id = #{appId,jdbcType=VARCHAR},
+            status = #{status,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

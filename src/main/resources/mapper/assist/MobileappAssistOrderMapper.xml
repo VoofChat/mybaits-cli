@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baijia.mobileapp.dal.assist.dao.MobileappAssistOrderDao">
+
+    <resultMap id="BaseResultMap" type="com.baijia.mobileapp.dal.assist.po.MobileappAssistOrderPo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="app_id" jdbcType="VARCHAR" property="appId" />
+        <result column="product_id" jdbcType="INTEGER" property="productId" />
+        <result column="spec_id" jdbcType="INTEGER" property="specId" />
+        <result column="member_id" jdbcType="INTEGER" property="memberId" />
+        <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+        <result column="activity_id" jdbcType="INTEGER" property="activityId" />
+        <result column="activity_member_id" jdbcType="INTEGER" property="activityMemberId" />
+        <result column="address_id" jdbcType="INTEGER" property="addressId" />
+        <result column="consignee" jdbcType="VARCHAR" property="consignee" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="area" jdbcType="VARCHAR" property="area" />
+        <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+        <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+        <result column="amount" jdbcType="DECIMAL" property="amount" />
+        <result column="product_type" jdbcType="INTEGER" property="productType" />
+        <result column="product_name" jdbcType="VARCHAR" property="productName" />
+        <result column="product_img" jdbcType="VARCHAR" property="productImg" />
+        <result column="spec_name" jdbcType="VARCHAR" property="specName" />
+        <result column="market_price" jdbcType="DECIMAL" property="marketPrice" />
+        <result column="activity_price" jdbcType="DECIMAL" property="activityPrice" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="pay_order_number" jdbcType="VARCHAR" property="payOrderNumber" />
+        <result column="third_trade_no" jdbcType="VARCHAR" property="thirdTradeNo" />
+        <result column="platform_trade_no" jdbcType="VARCHAR" property="platformTradeNo" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.baijia.mobileapp.dal.assist.po.MobileappAssistOrderPo">
+        <result column="pay_order_result" jdbcType="LONGVARCHAR" property="payOrderResult" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, app_id, product_id, spec_id, member_id, shop_id, activity_id, activity_member_id, 
+        address_id, consignee, phone, address, area, area_code, order_sn, amount, product_type, 
+        product_name, product_img, spec_name, market_price, activity_price, status, pay_order_number, 
+        third_trade_no, platform_trade_no, create_time, update_time
+    </sql>
+
+    <sql id="Blob_Column_List">
+        pay_order_result
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select 
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from um.`rp_mobileapp_assist_order`
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from um.`rp_mobileapp_assist_order`
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.baijia.mobileapp.dal.assist.po.MobileappAssistOrderPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`rp_mobileapp_assist_order` (app_id, product_id, spec_id, 
+            member_id, shop_id, activity_id, 
+            activity_member_id, address_id, consignee, 
+            phone, address, area, 
+            area_code, order_sn, amount, 
+            product_type, product_name, product_img, 
+            spec_name, market_price, activity_price, 
+            status, pay_order_number, third_trade_no, 
+            platform_trade_no, create_time, update_time, 
+            pay_order_result)
+        values (#{appId,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER}, #{specId,jdbcType=INTEGER}, 
+            #{memberId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{activityId,jdbcType=INTEGER}, 
+            #{activityMemberId,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER}, #{consignee,jdbcType=VARCHAR}, 
+            #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+            #{areaCode,jdbcType=VARCHAR}, #{orderSn,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
+            #{productType,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productImg,jdbcType=VARCHAR}, 
+            #{specName,jdbcType=VARCHAR}, #{marketPrice,jdbcType=DECIMAL}, #{activityPrice,jdbcType=DECIMAL}, 
+            #{status,jdbcType=INTEGER}, #{payOrderNumber,jdbcType=VARCHAR}, #{thirdTradeNo,jdbcType=VARCHAR}, 
+            #{platformTradeNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+            #{payOrderResult,jdbcType=LONGVARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.baijia.mobileapp.dal.assist.po.MobileappAssistOrderPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`rp_mobileapp_assist_order`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="specId != null">
+                spec_id,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="activityMemberId != null">
+                activity_member_id,
+            </if>
+            <if test="addressId != null">
+                address_id,
+            </if>
+            <if test="consignee != null">
+                consignee,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="areaCode != null">
+                area_code,
+            </if>
+            <if test="orderSn != null">
+                order_sn,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="productType != null">
+                product_type,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="productImg != null">
+                product_img,
+            </if>
+            <if test="specName != null">
+                spec_name,
+            </if>
+            <if test="marketPrice != null">
+                market_price,
+            </if>
+            <if test="activityPrice != null">
+                activity_price,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="payOrderNumber != null">
+                pay_order_number,
+            </if>
+            <if test="thirdTradeNo != null">
+                third_trade_no,
+            </if>
+            <if test="platformTradeNo != null">
+                platform_trade_no,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="payOrderResult != null">
+                pay_order_result,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="specId != null">
+                #{specId,jdbcType=INTEGER},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="activityMemberId != null">
+                #{activityMemberId,jdbcType=INTEGER},
+            </if>
+            <if test="addressId != null">
+                #{addressId,jdbcType=INTEGER},
+            </if>
+            <if test="consignee != null">
+                #{consignee,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderSn != null">
+                #{orderSn,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="productType != null">
+                #{productType,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productImg != null">
+                #{productImg,jdbcType=VARCHAR},
+            </if>
+            <if test="specName != null">
+                #{specName,jdbcType=VARCHAR},
+            </if>
+            <if test="marketPrice != null">
+                #{marketPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="activityPrice != null">
+                #{activityPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="payOrderNumber != null">
+                #{payOrderNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="thirdTradeNo != null">
+                #{thirdTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="platformTradeNo != null">
+                #{platformTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payOrderResult != null">
+                #{payOrderResult,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.baijia.mobileapp.dal.assist.po.MobileappAssistOrderPo">
+        update um.`rp_mobileapp_assist_order`
+        <set>
+            <if test="appId != null">
+                app_id = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="specId != null">
+                spec_id = #{specId,jdbcType=INTEGER},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="activityId != null">
+                activity_id = #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="activityMemberId != null">
+                activity_member_id = #{activityMemberId,jdbcType=INTEGER},
+            </if>
+            <if test="addressId != null">
+                address_id = #{addressId,jdbcType=INTEGER},
+            </if>
+            <if test="consignee != null">
+                consignee = #{consignee,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                area_code = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderSn != null">
+                order_sn = #{orderSn,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="productType != null">
+                product_type = #{productType,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productImg != null">
+                product_img = #{productImg,jdbcType=VARCHAR},
+            </if>
+            <if test="specName != null">
+                spec_name = #{specName,jdbcType=VARCHAR},
+            </if>
+            <if test="marketPrice != null">
+                market_price = #{marketPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="activityPrice != null">
+                activity_price = #{activityPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="payOrderNumber != null">
+                pay_order_number = #{payOrderNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="thirdTradeNo != null">
+                third_trade_no = #{thirdTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="platformTradeNo != null">
+                platform_trade_no = #{platformTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payOrderResult != null">
+                pay_order_result = #{payOrderResult,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.baijia.mobileapp.dal.assist.po.MobileappAssistOrderPo">
+        update um.`rp_mobileapp_assist_order`
+        set app_id = #{appId,jdbcType=VARCHAR},
+            product_id = #{productId,jdbcType=INTEGER},
+            spec_id = #{specId,jdbcType=INTEGER},
+            member_id = #{memberId,jdbcType=INTEGER},
+            shop_id = #{shopId,jdbcType=INTEGER},
+            activity_id = #{activityId,jdbcType=INTEGER},
+            activity_member_id = #{activityMemberId,jdbcType=INTEGER},
+            address_id = #{addressId,jdbcType=INTEGER},
+            consignee = #{consignee,jdbcType=VARCHAR},
+            phone = #{phone,jdbcType=VARCHAR},
+            address = #{address,jdbcType=VARCHAR},
+            area = #{area,jdbcType=VARCHAR},
+            area_code = #{areaCode,jdbcType=VARCHAR},
+            order_sn = #{orderSn,jdbcType=VARCHAR},
+            amount = #{amount,jdbcType=DECIMAL},
+            product_type = #{productType,jdbcType=INTEGER},
+            product_name = #{productName,jdbcType=VARCHAR},
+            product_img = #{productImg,jdbcType=VARCHAR},
+            spec_name = #{specName,jdbcType=VARCHAR},
+            market_price = #{marketPrice,jdbcType=DECIMAL},
+            activity_price = #{activityPrice,jdbcType=DECIMAL},
+            status = #{status,jdbcType=INTEGER},
+            pay_order_number = #{payOrderNumber,jdbcType=VARCHAR},
+            third_trade_no = #{thirdTradeNo,jdbcType=VARCHAR},
+            platform_trade_no = #{platformTradeNo,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            pay_order_result = #{payOrderResult,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.baijia.mobileapp.dal.assist.po.MobileappAssistOrderPo">
+        update um.`rp_mobileapp_assist_order`
+        set app_id = #{appId,jdbcType=VARCHAR},
+            product_id = #{productId,jdbcType=INTEGER},
+            spec_id = #{specId,jdbcType=INTEGER},
+            member_id = #{memberId,jdbcType=INTEGER},
+            shop_id = #{shopId,jdbcType=INTEGER},
+            activity_id = #{activityId,jdbcType=INTEGER},
+            activity_member_id = #{activityMemberId,jdbcType=INTEGER},
+            address_id = #{addressId,jdbcType=INTEGER},
+            consignee = #{consignee,jdbcType=VARCHAR},
+            phone = #{phone,jdbcType=VARCHAR},
+            address = #{address,jdbcType=VARCHAR},
+            area = #{area,jdbcType=VARCHAR},
+            area_code = #{areaCode,jdbcType=VARCHAR},
+            order_sn = #{orderSn,jdbcType=VARCHAR},
+            amount = #{amount,jdbcType=DECIMAL},
+            product_type = #{productType,jdbcType=INTEGER},
+            product_name = #{productName,jdbcType=VARCHAR},
+            product_img = #{productImg,jdbcType=VARCHAR},
+            spec_name = #{specName,jdbcType=VARCHAR},
+            market_price = #{marketPrice,jdbcType=DECIMAL},
+            activity_price = #{activityPrice,jdbcType=DECIMAL},
+            status = #{status,jdbcType=INTEGER},
+            pay_order_number = #{payOrderNumber,jdbcType=VARCHAR},
+            third_trade_no = #{thirdTradeNo,jdbcType=VARCHAR},
+            platform_trade_no = #{platformTradeNo,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.voofchat.freedom.biz.shop.dao.MiniappWxshopProductDao">
+
+    <resultMap id="BaseResultMap" type="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductPo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="brand_id" jdbcType="INTEGER" property="brandId" />
+        <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+        <result column="sn" jdbcType="VARCHAR" property="sn" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="primary_pic" jdbcType="VARCHAR" property="primaryPic" />
+        <result column="list_pic" jdbcType="VARCHAR" property="listPic" />
+        <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+        <result column="brief" jdbcType="VARCHAR" property="brief" />
+        <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
+        <result column="market_price" jdbcType="DECIMAL" property="marketPrice" />
+        <result column="retail_price" jdbcType="DECIMAL" property="retailPrice" />
+        <result column="sell_volume" jdbcType="INTEGER" property="sellVolume" />
+        <result column="is_new" jdbcType="BIT" property="isNew" />
+        <result column="is_hot" jdbcType="BIT" property="isHot" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductPo">
+        <result column="desc" jdbcType="LONGVARCHAR" property="desc" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, brand_id, category_id, sn, title, primary_pic, list_pic, keywords, brief, sort_order, 
+        market_price, retail_price, sell_volume, is_new, is_hot, status, create_time, update_time
+    </sql>
+
+    <sql id="Blob_Column_List">
+        desc
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select 
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from um.`miniapp_wxshop_product`
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from um.`miniapp_wxshop_product`
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`miniapp_wxshop_product` (brand_id, category_id, sn, 
+            title, primary_pic, list_pic, 
+            keywords, brief, sort_order, 
+            market_price, retail_price, sell_volume, 
+            is_new, is_hot, status, create_time, 
+            update_time, desc)
+        values (#{brandId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{sn,jdbcType=VARCHAR}, 
+            #{title,jdbcType=VARCHAR}, #{primaryPic,jdbcType=VARCHAR}, #{listPic,jdbcType=VARCHAR}, 
+            #{keywords,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, #{sortOrder,jdbcType=INTEGER}, 
+            #{marketPrice,jdbcType=DECIMAL}, #{retailPrice,jdbcType=DECIMAL}, #{sellVolume,jdbcType=INTEGER}, 
+            #{isNew,jdbcType=BIT}, #{isHot,jdbcType=BIT}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+            #{updateTime,jdbcType=TIMESTAMP}, #{desc,jdbcType=LONGVARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductPo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into um.`miniapp_wxshop_product`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="sn != null">
+                sn,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="primaryPic != null">
+                primary_pic,
+            </if>
+            <if test="listPic != null">
+                list_pic,
+            </if>
+            <if test="keywords != null">
+                keywords,
+            </if>
+            <if test="brief != null">
+                brief,
+            </if>
+            <if test="sortOrder != null">
+                sort_order,
+            </if>
+            <if test="marketPrice != null">
+                market_price,
+            </if>
+            <if test="retailPrice != null">
+                retail_price,
+            </if>
+            <if test="sellVolume != null">
+                sell_volume,
+            </if>
+            <if test="isNew != null">
+                is_new,
+            </if>
+            <if test="isHot != null">
+                is_hot,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="desc != null">
+                desc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="brandId != null">
+                #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="sn != null">
+                #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="primaryPic != null">
+                #{primaryPic,jdbcType=VARCHAR},
+            </if>
+            <if test="listPic != null">
+                #{listPic,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="brief != null">
+                #{brief,jdbcType=VARCHAR},
+            </if>
+            <if test="sortOrder != null">
+                #{sortOrder,jdbcType=INTEGER},
+            </if>
+            <if test="marketPrice != null">
+                #{marketPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="retailPrice != null">
+                #{retailPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="sellVolume != null">
+                #{sellVolume,jdbcType=INTEGER},
+            </if>
+            <if test="isNew != null">
+                #{isNew,jdbcType=BIT},
+            </if>
+            <if test="isHot != null">
+                #{isHot,jdbcType=BIT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="desc != null">
+                #{desc,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductPo">
+        update um.`miniapp_wxshop_product`
+        <set>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=INTEGER},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="sn != null">
+                sn = #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="primaryPic != null">
+                primary_pic = #{primaryPic,jdbcType=VARCHAR},
+            </if>
+            <if test="listPic != null">
+                list_pic = #{listPic,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="brief != null">
+                brief = #{brief,jdbcType=VARCHAR},
+            </if>
+            <if test="sortOrder != null">
+                sort_order = #{sortOrder,jdbcType=INTEGER},
+            </if>
+            <if test="marketPrice != null">
+                market_price = #{marketPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="retailPrice != null">
+                retail_price = #{retailPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="sellVolume != null">
+                sell_volume = #{sellVolume,jdbcType=INTEGER},
+            </if>
+            <if test="isNew != null">
+                is_new = #{isNew,jdbcType=BIT},
+            </if>
+            <if test="isHot != null">
+                is_hot = #{isHot,jdbcType=BIT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="desc != null">
+                desc = #{desc,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductPo">
+        update um.`miniapp_wxshop_product`
+        set brand_id = #{brandId,jdbcType=INTEGER},
+            category_id = #{categoryId,jdbcType=INTEGER},
+            sn = #{sn,jdbcType=VARCHAR},
+            title = #{title,jdbcType=VARCHAR},
+            primary_pic = #{primaryPic,jdbcType=VARCHAR},
+            list_pic = #{listPic,jdbcType=VARCHAR},
+            keywords = #{keywords,jdbcType=VARCHAR},
+            brief = #{brief,jdbcType=VARCHAR},
+            sort_order = #{sortOrder,jdbcType=INTEGER},
+            market_price = #{marketPrice,jdbcType=DECIMAL},
+            retail_price = #{retailPrice,jdbcType=DECIMAL},
+            sell_volume = #{sellVolume,jdbcType=INTEGER},
+            is_new = #{isNew,jdbcType=BIT},
+            is_hot = #{isHot,jdbcType=BIT},
+            status = #{status,jdbcType=TINYINT},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            desc = #{desc,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.voofchat.freedom.biz.shop.entity.po.MiniappWxshopProductPo">
+        update um.`miniapp_wxshop_product`
+        set brand_id = #{brandId,jdbcType=INTEGER},
+            category_id = #{categoryId,jdbcType=INTEGER},
+            sn = #{sn,jdbcType=VARCHAR},
+            title = #{title,jdbcType=VARCHAR},
+            primary_pic = #{primaryPic,jdbcType=VARCHAR},
+            list_pic = #{listPic,jdbcType=VARCHAR},
+            keywords = #{keywords,jdbcType=VARCHAR},
+            brief = #{brief,jdbcType=VARCHAR},
+            sort_order = #{sortOrder,jdbcType=INTEGER},
+            market_price = #{marketPrice,jdbcType=DECIMAL},
+            retail_price = #{retailPrice,jdbcType=DECIMAL},
+            sell_volume = #{sellVolume,jdbcType=INTEGER},
+            is_new = #{isNew,jdbcType=BIT},
+            is_hot = #{isHot,jdbcType=BIT},
+            status = #{status,jdbcType=TINYINT},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
