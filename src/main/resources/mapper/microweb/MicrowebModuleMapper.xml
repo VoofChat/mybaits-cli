@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.baijia.growthbase.dal.microweb.dao.MicrowebModuleDao">
+<mapper namespace="com.baijia.growthbase.dal.microweb.dao.MicrowebModuleMapper">
 
-    <resultMap id="BaseResultMap" type="com.baijia.growthbase.dal.microweb.po.MicrowebModulePo">
+    <resultMap id="BaseResultMap" type="com.baijia.growthbase.dal.microweb.po.MicrowebModulePO">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="type_id" jdbcType="INTEGER" property="typeId" />
         <result column="title" jdbcType="VARCHAR" property="title" />
@@ -28,10 +28,7 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="com.baijia.growthbase.dal.microweb.po.MicrowebModulePo">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+    <insert id="insert" keyProperty="id" parameterType="com.baijia.growthbase.dal.microweb.po.MicrowebModulePO" useGeneratedKeys="true">
         insert into um.`rp_microweb_module` (type_id, title, img, 
             status, create_time, update_time
             )
@@ -40,10 +37,7 @@
             )
     </insert>
 
-    <insert id="insertSelective" parameterType="com.baijia.growthbase.dal.microweb.po.MicrowebModulePo">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+    <insert id="insertSelective" keyProperty="id" parameterType="com.baijia.growthbase.dal.microweb.po.MicrowebModulePO" useGeneratedKeys="true">
         insert into um.`rp_microweb_module`
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="typeId != null">
@@ -87,7 +81,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.baijia.growthbase.dal.microweb.po.MicrowebModulePo">
+    <update id="updateByPrimaryKeySelective" parameterType="com.baijia.growthbase.dal.microweb.po.MicrowebModulePO">
         update um.`rp_microweb_module`
         <set>
             <if test="typeId != null">
@@ -102,24 +96,16 @@
             <if test="status != null">
                 status = #{status,jdbcType=INTEGER},
             </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.baijia.growthbase.dal.microweb.po.MicrowebModulePo">
+    <update id="updateByPrimaryKey" parameterType="com.baijia.growthbase.dal.microweb.po.MicrowebModulePO">
         update um.`rp_microweb_module`
         set type_id = #{typeId,jdbcType=INTEGER},
             title = #{title,jdbcType=VARCHAR},
             img = #{img,jdbcType=VARCHAR},
-            status = #{status,jdbcType=INTEGER},
-            create_time = #{createTime,jdbcType=TIMESTAMP},
-            update_time = #{updateTime,jdbcType=TIMESTAMP}
+            status = #{statusjdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>
