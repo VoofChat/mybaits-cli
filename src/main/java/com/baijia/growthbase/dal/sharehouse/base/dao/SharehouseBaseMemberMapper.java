@@ -1,8 +1,8 @@
-package com.baijia.growthbase.dal.microweb.dao;
+package com.baijia.growthbase.dal.sharehouse.base.dao;
 
-import com.baijia.growthbase.dal.microweb.po.MicrowebModulePO;
+import com.baijia.growthbase.dal.sharehouse.base.po.SharehouseBaseMemberPO;
 
-public interface MicrowebModuleMapper {
+public interface SharehouseBaseMemberMapper {
     /**
      * 根据主键删除数据库的记录
      *
@@ -17,7 +17,7 @@ public interface MicrowebModuleMapper {
      * @param record
      * @return 
      */
-    int insert(MicrowebModulePO record);
+    int insert(SharehouseBaseMemberPO record);
 
     /**
      * 插入数据库记录
@@ -25,7 +25,7 @@ public interface MicrowebModuleMapper {
      * @param record
      * @return 
      */
-    int insertSelective(MicrowebModulePO record);
+    int insertSelective(SharehouseBaseMemberPO record);
 
     /**
      * 根据主键获取一条数据库记录
@@ -33,7 +33,7 @@ public interface MicrowebModuleMapper {
      * @param id
      * @return 
      */
-    MicrowebModulePO selectByPrimaryKey(Integer id);
+    SharehouseBaseMemberPO selectByPrimaryKey(Integer id);
 
     /**
      * 根据主键来更新数据库记录
@@ -41,7 +41,7 @@ public interface MicrowebModuleMapper {
      * @param record
      * @return 
      */
-    int updateByPrimaryKeySelective(MicrowebModulePO record);
+    int updateByPrimaryKeySelective(SharehouseBaseMemberPO record);
 
     /**
      * 根据主键来更新数据库记录
@@ -49,5 +49,5 @@ public interface MicrowebModuleMapper {
      * @param record
      * @return 
      */
-    int updateByPrimaryKey(MicrowebModulePO record);
+    int updateByPrimaryKey(SharehouseBaseMemberPO record);
 }

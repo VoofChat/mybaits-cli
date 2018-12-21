@@ -16,6 +16,20 @@
         <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
+
+        <!-- lombok 配置信息 -->
+        <plugin type="org.mybatis.generator.plugins.LombokPlugin" >
+            <property name="hasLombok" value="true"/>
+        </plugin>
+
+        <!--
+            sql update 过滤插件
+            removeColumns ：指定过滤的sql字段名称，多个用分号","间隔
+        -->
+        <plugin type="org.mybatis.generator.plugins.BaijiaGrowthSqlUpdatePlugin" >
+            <property name="removeColumns" value="create_time,update_time"/>
+        </plugin>
+
         <!-- 增加Models ToStirng方法 -->
         <!--<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />-->
         <!-- 增加爱Models Serializable实现 -->
@@ -30,69 +44,41 @@
         <!--<plugin type="com.xxg.mybatis.plugins.MySQLLimitPlugin" />-->
         <!--<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />-->
 
-
+        <!-- 注释配置信息 -->
         <commentGenerator type="org.mybatis.generator.internal.VoofchatCommentGenerator">
             <property name="javaFileEncoding" value="UTF-8"/>
-            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
-            <property name="suppressAllComments" value="false" />
-            <property name="suppressDate" value="true" />
+            <property name="email" value="zhengzhixiong@baijiahulian.com" />
+            <property name="author" value="郑志雄" />
         </commentGenerator>
 
         <!-- jdbc连接信息 -->
-        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/seckill" userId="root" password="123456"/>-->
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/jeecg" userId="root" password="123456"/>-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://172.21.139.13:3307/um" userId="chaikuprod" password="testchaiku"/>
-        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
-                        <!--connectionURL="jdbc:mysql://127.0.0.1/um" userId="root" password="123456"/>-->
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
         <!-- 生成bean和example对象 -->
-        <javaModelGenerator targetPackage="com.baijia.mobileapp.dal.assist.po" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.baijia.growthbase.dal.sharehouse.base.po" targetProject="src/main/java">
             <property name="constructorBased" value="false"/>
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- 生成mapper.xml类 -->
-        <sqlMapGenerator targetPackage="assist" targetProject="src/main/resources/mapper">
+        <sqlMapGenerator targetPackage="sharehouse.base" targetProject="src/main/resources/mapper">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.baijia.mobileapp.dal.assist.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.baijia.growthbase.dal.sharehouse.base.dao" targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
 
-        <table tableName="rp_mobileapp_assist_activity" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        <table tableName="rp_sharehouse_base_member" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" />
-        </table>
-
-        <table tableName="rp_mobileapp_assist_activity_member" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" />
-        </table>
-
-        <table tableName="rp_mobileapp_assist_member" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" />
-        </table>
-
-        <table tableName="rp_mobileapp_assist_order" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" />
-        </table>
-
-        <table tableName="rp_coursesystem_assist_product" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" />
-        </table>
-
-        <table tableName="rp_coursesystem_assist_spec" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
         </table>
 
     </context>

@@ -27,7 +27,7 @@
             removeColumns ：指定过滤的sql字段名称，多个用分号","间隔
         -->
         <plugin type="org.mybatis.generator.plugins.BaijiaGrowthSqlUpdatePlugin" >
-            <property name="removeColumns" value="name,create_time,update_time"/>
+            <property name="removeColumns" value="create_time,update_time"/>
         </plugin>
 
         <!-- 增加Models ToStirng方法 -->
@@ -52,6 +52,7 @@
         </commentGenerator>
 
         <!-- jdbc连接信息 -->
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/jeecg" userId="root" password="123456"/>-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://172.21.139.13:3307/um" userId="chaikuprod" password="testchaiku"/>
 
         <javaTypeResolver>
@@ -59,27 +60,25 @@
         </javaTypeResolver>
 
         <!-- 生成bean和example对象 -->
-        <javaModelGenerator targetPackage="com.baijia.growthbase.dal.microweb.po" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.baijia.growthbase.dal.sharehouse.sharetask.po" targetProject="src/main/java">
             <property name="constructorBased" value="false"/>
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- 生成mapper.xml类 -->
-        <sqlMapGenerator targetPackage="microweb" targetProject="src/main/resources/mapper">
+        <sqlMapGenerator targetPackage="sharehouse.sharetask" targetProject="src/main/resources/mapper">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.baijia.growthbase.dal.microweb.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.baijia.growthbase.dal.sharehouse.sharetask.dao" targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-
-        <table tableName="rp_microweb_module" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        <table tableName="rp_sharehouse_sharetask_content" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
             <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
         </table>
-
 
     </context>
 </generatorConfiguration>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baijia.growthbase.dal.sharehouse.sharetask.dao.SharehouseSharetaskContentMapper">
+
+    <resultMap id="BaseResultMap" type="com.baijia.growthbase.dal.sharehouse.sharetask.po.SharehouseSharetaskContentPO">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="app_id" jdbcType="VARCHAR" property="appId" />
+        <result column="app_name" jdbcType="VARCHAR" property="appName" />
+        <result column="is_show_app" jdbcType="BIT" property="isShowApp" />
+        <result column="account_id" jdbcType="INTEGER" property="accountId" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="post_url" jdbcType="VARCHAR" property="postUrl" />
+        <result column="file" jdbcType="VARCHAR" property="file" />
+        <result column="forward_card" jdbcType="VARCHAR" property="forwardCard" />
+        <result column="redirect_url" jdbcType="VARCHAR" property="redirectUrl" />
+        <result column="redirect_require" jdbcType="VARCHAR" property="redirectRequire" />
+        <result column="index_btn_title" jdbcType="VARCHAR" property="indexBtnTitle" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, app_id, app_name, is_show_app, account_id, title, post_url, file, forward_card, 
+        redirect_url, redirect_require, index_btn_title, status, create_time, update_time
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from um.`rp_sharehouse_sharetask_content`
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from um.`rp_sharehouse_sharetask_content`
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" keyProperty="id" parameterType="com.baijia.growthbase.dal.sharehouse.sharetask.po.SharehouseSharetaskContentPO" useGeneratedKeys="true">
+        insert into um.`rp_sharehouse_sharetask_content` (app_id, app_name, is_show_app, 
+            account_id, title, post_url, 
+            file, forward_card, redirect_url, 
+            redirect_require, index_btn_title, status, 
+            create_time, update_time)
+        values (#{appId,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, #{isShowApp,jdbcType=BIT}, 
+            #{accountId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{postUrl,jdbcType=VARCHAR}, 
+            #{file,jdbcType=VARCHAR}, #{forwardCard,jdbcType=VARCHAR}, #{redirectUrl,jdbcType=VARCHAR}, 
+            #{redirectRequire,jdbcType=VARCHAR}, #{indexBtnTitle,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" keyProperty="id" parameterType="com.baijia.growthbase.dal.sharehouse.sharetask.po.SharehouseSharetaskContentPO" useGeneratedKeys="true">
+        insert into um.`rp_sharehouse_sharetask_content`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="appName != null">
+                app_name,
+            </if>
+            <if test="isShowApp != null">
+                is_show_app,
+            </if>
+            <if test="accountId != null">
+                account_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="postUrl != null">
+                post_url,
+            </if>
+            <if test="file != null">
+                file,
+            </if>
+            <if test="forwardCard != null">
+                forward_card,
+            </if>
+            <if test="redirectUrl != null">
+                redirect_url,
+            </if>
+            <if test="redirectRequire != null">
+                redirect_require,
+            </if>
+            <if test="indexBtnTitle != null">
+                index_btn_title,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="appName != null">
+                #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="isShowApp != null">
+                #{isShowApp,jdbcType=BIT},
+            </if>
+            <if test="accountId != null">
+                #{accountId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="postUrl != null">
+                #{postUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="file != null">
+                #{file,jdbcType=VARCHAR},
+            </if>
+            <if test="forwardCard != null">
+                #{forwardCard,jdbcType=VARCHAR},
+            </if>
+            <if test="redirectUrl != null">
+                #{redirectUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="redirectRequire != null">
+                #{redirectRequire,jdbcType=VARCHAR},
+            </if>
+            <if test="indexBtnTitle != null">
+                #{indexBtnTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.baijia.growthbase.dal.sharehouse.sharetask.po.SharehouseSharetaskContentPO">
+        update um.`rp_sharehouse_sharetask_content`
+        <set>
+            <if test="appId != null">
+                app_id = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="appName != null">
+                app_name = #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="isShowApp != null">
+                is_show_app = #{isShowApp,jdbcType=BIT},
+            </if>
+            <if test="accountId != null">
+                account_id = #{accountId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="postUrl != null">
+                post_url = #{postUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="file != null">
+                file = #{file,jdbcType=VARCHAR},
+            </if>
+            <if test="forwardCard != null">
+                forward_card = #{forwardCard,jdbcType=VARCHAR},
+            </if>
+            <if test="redirectUrl != null">
+                redirect_url = #{redirectUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="redirectRequire != null">
+                redirect_require = #{redirectRequire,jdbcType=VARCHAR},
+            </if>
+            <if test="indexBtnTitle != null">
+                index_btn_title = #{indexBtnTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.baijia.growthbase.dal.sharehouse.sharetask.po.SharehouseSharetaskContentPO">
+        update um.`rp_sharehouse_sharetask_content`
+        set app_id = #{appId,jdbcType=VARCHAR},
+            app_name = #{appName,jdbcType=VARCHAR},
+            is_show_app = #{isShowApp,jdbcType=BIT},
+            account_id = #{accountId,jdbcType=INTEGER},
+            title = #{title,jdbcType=VARCHAR},
+            post_url = #{postUrl,jdbcType=VARCHAR},
+            file = #{file,jdbcType=VARCHAR},
+            forward_card = #{forwardCard,jdbcType=VARCHAR},
+            redirect_url = #{redirectUrl,jdbcType=VARCHAR},
+            redirect_require = #{redirectRequire,jdbcType=VARCHAR},
+            index_btn_title = #{indexBtnTitle,jdbcType=VARCHAR},
+            status = #{statusjdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
