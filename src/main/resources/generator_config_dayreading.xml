@@ -51,35 +51,31 @@
             <property name="author" value="郑志雄" />
         </commentGenerator>
 
-        <!-- jdbc连接信息 -->
-        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/jeecg" userId="root" password="123456"/>-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://172.21.139.13:3307/um" userId="chaikuprod" password="testchaiku"/>
-
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
         <!-- 生成bean和example对象 -->
-        <javaModelGenerator targetPackage="com.baijia.growthbase.dal.sharehouse.base.po" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.baijia.mobileapp.dal.dayreading.po" targetProject="src/main/java">
             <property name="constructorBased" value="false"/>
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- 生成mapper.xml类 -->
-        <sqlMapGenerator targetPackage="sharehouse.base" targetProject="src/main/resources/mapper">
+        <sqlMapGenerator targetPackage="dayreading" targetProject="src/main/resources/mapper">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.baijia.growthbase.dal.sharehouse.base.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.baijia.mobileapp.dal.dayreading.dao" targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-
-        <table tableName="rp_sharehouse_base_member" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        <table tableName="rp_mobileapp_dayreading_member_check" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
             <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
         </table>
 
     </context>
+
 </generatorConfiguration>
