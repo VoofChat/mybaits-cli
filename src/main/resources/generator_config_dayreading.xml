@@ -47,8 +47,8 @@
         <!-- 注释配置信息 -->
         <commentGenerator type="org.mybatis.generator.internal.VoofchatCommentGenerator">
             <property name="javaFileEncoding" value="UTF-8"/>
-            <property name="email" value="zhengzhixiong@baijiahulian.com" />
-            <property name="author" value="郑志雄" />
+            <property name="email" value="xxxxxxx" />
+            <property name="author" value="xxx" />
         </commentGenerator>
 
         <javaTypeResolver>
